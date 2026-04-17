@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  front:
+    container_name: front-warrion
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8088:80"
+    restart: always
+    networks:
+      - warrion_network
+      - nginx-proxy-manager_default
+    healthcheck:
+      # If served by nginx, checking “/” is typically fine
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8080/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+networks:
+  warrion_network:
+  nginx-proxy-manager_default:
+    external: true
