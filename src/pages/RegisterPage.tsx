@@ -39,7 +39,7 @@ export default function RegisterPage() {
               <path d="M10 9V8C10 6.9 10.9 6 12 6H16C17.1 6 18 6.9 18 8V9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
               <circle cx="14" cy="14" r="2" fill="white"/>
             </svg>
-            Coffre-Fort
+            Warrion
           </Link>
         </div>
 

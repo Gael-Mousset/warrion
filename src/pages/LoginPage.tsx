@@ -38,13 +38,13 @@ export default function LoginPage() {
               <path d="M10 9V8C10 6.9 10.9 6 12 6H16C17.1 6 18 6.9 18 8V9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
               <circle cx="14" cy="14" r="2" fill="white"/>
             </svg>
-            Coffre-Fort
+            Warrion
           </Link>
         </div>
 
         <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-8">
           <h1 className="text-2xl font-bold text-brand-600 mb-1">Bon retour !</h1>
-          <p className="text-sm text-gray-500 mb-7">Connectez-vous à votre coffre-fort</p>
+          <p className="text-sm text-gray-500 mb-7">Connectez-vous à votre espace Warrion</p>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-5">

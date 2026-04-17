@@ -13,7 +13,7 @@ export default function LandingPage() {
             <path d="M10 9V8C10 6.9 10.9 6 12 6H16C17.1 6 18 6.9 18 8V9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
             <circle cx="14" cy="14" r="2" fill="white"/>
           </svg>
-          Coffre-Fort Garanties
+          Warrion
         </div>
         <div className="flex gap-3">
           <Link to="/login" className="text-sm text-gray-600 hover:text-brand-600 font-medium px-4 py-2 rounded-lg hover:bg-brand-50 transition-colors">
@@ -35,8 +35,8 @@ export default function LandingPage() {
         </span>
 
         <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-brand-600 mb-5">
-          Coffre-fort intelligent<br />
-          <span className="text-gray-800">pour vos garanties</span>
+          Warrion<br />
+          <span className="text-gray-800">vos garanties en sécurité</span>
         </h1>
 
         <p className="text-lg text-gray-500 leading-relaxed mb-10 max-w-xl mx-auto">
