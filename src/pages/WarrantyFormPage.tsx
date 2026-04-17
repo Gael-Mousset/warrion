@@ -27,6 +27,7 @@ export default function WarrantyFormPage() {
     warranty?.photoUrl?.startsWith('data:') ? 'fichier' : 'url'
   )
   const [notes, setNotes] = useState(warranty?.notes ?? '')
+  const [isPrecious, setIsPrecious] = useState(warranty?.isPrecious ?? false)
   const [error, setError] = useState('')
 
   if (isEdit && !warranty) {
@@ -69,6 +70,7 @@ export default function WarrantyFormPage() {
       warrantyDurationMonths: parseInt(duration),
       photoUrl: photoUrl || CATEGORY_PHOTOS[category as Category] || '',
       notes,
+      isPrecious,
     }
     if (isEdit && warranty) {
       updateWarranty(warranty.id, data)
@@ -251,6 +253,24 @@ export default function WarrantyFormPage() {
               />
             )}
           </div>
+
+          {/* Objet précieux */}
+          <label className="flex items-center gap-3 cursor-pointer select-none w-fit">
+            <div className="relative">
+              <input
+                type="checkbox"
+                checked={isPrecious}
+                onChange={e => setIsPrecious(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-10 h-6 bg-gray-200 rounded-full peer-checked:bg-brand-600 transition-colors" />
+              <div className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4" />
+            </div>
+            <div>
+              <span className="text-sm font-medium text-gray-700">Objet précieux</span>
+              <p className="text-xs text-gray-400">Une confirmation supplémentaire sera demandée avant suppression</p>
+            </div>
+          </label>
 
           {/* Notes */}
           <div>

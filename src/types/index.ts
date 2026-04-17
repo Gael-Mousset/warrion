@@ -27,6 +27,7 @@ export interface Warranty {
   warrantyDurationMonths: number
   photoUrl?: string
   notes?: string
+  isPrecious?: boolean
   createdAt: string
 }
 

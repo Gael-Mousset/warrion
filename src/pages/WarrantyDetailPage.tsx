@@ -1,13 +1,16 @@
 // src/pages/WarrantyDetailPage.tsx
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useWarranties } from '../context/WarrantyContext'
 import { enrichWarranty, formatDate, formatTimeRemaining, STATUS_STYLES, STATUS_LABELS, CATEGORY_PHOTOS } from '../utils/warrantyUtils'
 import { CATEGORY_LABELS } from '../types'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 export default function WarrantyDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { getWarranty, deleteWarranty } = useWarranties()
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const raw = id ? getWarranty(id) : undefined
   if (!raw) {
@@ -36,11 +39,9 @@ export default function WarrantyDetailPage() {
     : days < 30 ? (days > 1 ? 'jours' : 'jour')
     : (Math.floor(days / 30) > 1 ? 'mois' : 'mois')
 
-  const handleDelete = () => {
-    if (window.confirm(`Supprimer la garantie de "${w.name}" ?`)) {
-      deleteWarranty(w.id)
-      navigate('/dashboard')
-    }
+  const confirmDelete = () => {
+    deleteWarranty(w.id)
+    navigate('/dashboard')
   }
 
   return (
@@ -118,7 +119,7 @@ export default function WarrantyDetailPage() {
           {/* Actions */}
           <div className="flex gap-3">
             <button
-              onClick={handleDelete}
+              onClick={() => setShowConfirm(true)}
               className="flex items-center gap-1.5 text-sm text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 px-4 py-2 rounded-lg font-medium transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -145,6 +146,17 @@ export default function WarrantyDetailPage() {
           </div>
         </div>
       </div>
+
+      {showConfirm && (
+        <ConfirmDialog
+          title="Supprimer la garantie ?"
+          message={<><span className="font-semibold text-gray-700">"{w.name}"</span> sera définitivement supprimé. Cette action est irréversible.</>}
+          confirmLabel="Oui, supprimer"
+          requireWord={w.isPrecious ? 'SUPPRIMER' : undefined}
+          onConfirm={confirmDelete}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
     </div>
   )
 }
