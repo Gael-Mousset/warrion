@@ -39,8 +39,8 @@ export default function WarrantyDetailPage() {
     : days < 30 ? (days > 1 ? 'jours' : 'jour')
     : (Math.floor(days / 30) > 1 ? 'mois' : 'mois')
 
-  const confirmDelete = () => {
-    deleteWarranty(w.id)
+  const confirmDelete = async () => {
+    await deleteWarranty(w.id)
     navigate('/dashboard')
   }
 

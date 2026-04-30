@@ -12,20 +12,18 @@ export default function RegisterPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     if (!name || !email || !password) { setError('Veuillez remplir tous les champs.'); return }
     setLoading(true)
-    setTimeout(() => {
-      const result = register(name, email, password)
-      if (result.success) {
-        navigate('/dashboard')
-      } else {
-        setError(result.error ?? 'Erreur inconnue')
-        setLoading(false)
-      }
-    }, 300)
+    const result = await register(name, email, password)
+    if (result.success) {
+      navigate('/dashboard')
+    } else {
+      setError(result.error ?? 'Erreur inconnue')
+      setLoading(false)
+    }
   }
 
   return (

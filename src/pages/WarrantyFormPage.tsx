@@ -55,7 +55,7 @@ export default function WarrantyFormPage() {
     ? computeExpirationDate(purchaseDate, parseInt(duration))
     : null
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     if (!name || !category || !purchaseDate || !duration) {
@@ -72,12 +72,16 @@ export default function WarrantyFormPage() {
       notes,
       isPrecious,
     }
-    if (isEdit && warranty) {
-      updateWarranty(warranty.id, data)
-      navigate(`/warranty/${warranty.id}`)
-    } else {
-      addWarranty(data)
-      navigate('/dashboard')
+    try {
+      if (isEdit && warranty) {
+        await updateWarranty(warranty.id, data)
+        navigate(`/warranty/${warranty.id}`)
+      } else {
+        await addWarranty(data)
+        navigate('/dashboard')
+      }
+    } catch {
+      setError('Une erreur est survenue. Vérifiez votre connexion.')
     }
   }
 

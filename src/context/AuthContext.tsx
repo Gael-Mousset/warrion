@@ -1,63 +1,58 @@
-// src/context/AuthContext.tsx
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import type { User } from '../types'
 import { DEMO_USER } from '../data/mockData'
+import { apiLogin, apiRegister } from '../services/api'
 
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
-  login: (email: string, password: string) => { success: boolean; error?: string }
-  register: (name: string, email: string, password: string) => { success: boolean; error?: string }
+  isDemoUser: boolean
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>
   logout: () => void
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-function getUsers(): User[] {
-  try { return JSON.parse(localStorage.getItem('cff_users') || '[]') } catch { return [] }
-}
-function saveUsers(users: User[]) {
-  localStorage.setItem('cff_users', JSON.stringify(users))
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    // Init demo user
-    const users = getUsers()
-    if (!users.find(u => u.email === DEMO_USER.email)) {
-      saveUsers([...users, DEMO_USER])
-    }
-    // Restore session
     try {
       const session = sessionStorage.getItem('cff_session')
       if (session) setUser(JSON.parse(session))
     } catch { /* ignore */ }
   }, [])
 
-  const login = (email: string, password: string) => {
-    const users = getUsers()
-    const found = users.find(u => u.email === email && u.password === password)
-    if (!found) return { success: false, error: 'Email ou mot de passe incorrect.' }
-    setUser(found)
-    sessionStorage.setItem('cff_session', JSON.stringify(found))
-    return { success: true }
+  const isDemoUser = user?.id === DEMO_USER.id
+
+  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    // Compte démo : toujours local, jamais de requête API
+    if (email === DEMO_USER.email && password === DEMO_USER.password) {
+      setUser(DEMO_USER)
+      sessionStorage.setItem('cff_session', JSON.stringify(DEMO_USER))
+      return { success: true }
+    }
+    try {
+      const loggedUser = await apiLogin(email, password)
+      setUser(loggedUser)
+      sessionStorage.setItem('cff_session', JSON.stringify(loggedUser))
+      return { success: true }
+    } catch (err: any) {
+      return { success: false, error: err.message ?? 'Erreur inconnue.' }
+    }
   }
 
-  const register = (name: string, email: string, password: string) => {
+  const register = async (name: string, email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     if (password.length < 6) return { success: false, error: 'Mot de passe trop court (6 caractères min).' }
-    const users = getUsers()
-    if (users.find(u => u.email === email)) return { success: false, error: 'Cet email est déjà utilisé.' }
-    const newUser: User = {
-      id: 'user_' + Date.now(),
-      email, name, password,
-      createdAt: new Date().toISOString().split('T')[0],
+    try {
+      const newUser = await apiRegister(name, email, password)
+      setUser(newUser)
+      sessionStorage.setItem('cff_session', JSON.stringify(newUser))
+      return { success: true }
+    } catch (err: any) {
+      return { success: false, error: err.message ?? 'Erreur inconnue.' }
     }
-    saveUsers([...users, newUser])
-    setUser(newUser)
-    sessionStorage.setItem('cff_session', JSON.stringify(newUser))
-    return { success: true }
   }
 
   const logout = () => {
@@ -66,7 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isDemoUser, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   )
