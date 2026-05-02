@@ -48,7 +48,7 @@ services:
       context: .
       dockerfile: dockerfile
       args:
-        - VITE_API_URL: http://51.77.137.168:3000
+        - VITE_API_URL=http://51.77.137.168:3000
     ports:
       - "8088:80"
     restart: always
