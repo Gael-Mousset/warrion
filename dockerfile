@@ -3,7 +3,7 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 COPY package*.json .
-RUN --mount=type=cache,target=/root/.npm npm ci --prefer-offline
+RUN npm install
 COPY . .
 
 ARG VITE_API_URL
