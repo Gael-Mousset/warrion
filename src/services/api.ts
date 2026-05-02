@@ -1,6 +1,6 @@
 import type { User, Warranty } from "../types";
 
-const BASE = import.meta.env.VITE_API_URL;
+const BASE = import.meta.env.VITE_API_LOCAL_URL;
 
 function mapUser(doc: any): User {
   const { _id, __v, password, ...rest } = doc;

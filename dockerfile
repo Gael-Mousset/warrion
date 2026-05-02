@@ -6,6 +6,9 @@ COPY package*.json .
 RUN --mount=type=cache,target=/root/.npm npm ci --prefer-offline
 COPY . .
 
+ARG VITE_API_LOCAL_URL
+ENV VITE_API_LOCAL_URL=$VITE_API_LOCAL_URL
+
 RUN npm run build
 
 
