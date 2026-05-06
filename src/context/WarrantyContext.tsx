@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from '
 import type { Warranty } from '../types'
 import { MOCK_WARRANTIES } from '../data/mockData'
 import { useAuth } from './AuthContext'
-import { apiGetWarranties, apiCreateWarranty, apiUpdateWarranty, apiDeleteWarranty } from '../services/api'
+import { apiGetWarranties, apiCreateWarranty, apiUpdateWarranty, apiDeleteWarranty } from '../services/warranties.api'
 
 interface WarrantyContextType {
   warranties: Warranty[]
