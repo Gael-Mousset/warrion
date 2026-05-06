@@ -77,11 +77,47 @@ export const STATUS_LABELS: Record<WarrantyStatus, string> = {
   expired: 'Expiré',
 }
 
+export const CATEGORY_BRANDS: Record<string, string[]> = {
+  electromenager: ['Samsung', 'LG', 'Bosch', 'Siemens', 'Miele', 'Whirlpool', 'Electrolux', 'Indesit', 'Candy', 'Beko', 'Hotpoint', 'AEG'],
+  electronique:   ['Samsung', 'Sony', 'LG', 'Philips', 'Panasonic', 'Apple', 'Bose', 'JBL', 'Xiaomi', 'Hisense', 'TCL'],
+  informatique:   ['Apple', 'Dell', 'HP', 'Lenovo', 'Asus', 'Acer', 'MSI', 'Microsoft', 'Samsung', 'Razer', 'Huawei'],
+  vehicule:       ['Renault', 'Peugeot', 'Citroën', 'Volkswagen', 'Toyota', 'BMW', 'Mercedes', 'Ford', 'Opel', 'Dacia', 'Tesla', 'Kia', 'Hyundai', 'Audi', 'Yamaha', 'Honda', 'Kawasaki'],
+  jardinage:      ['Husqvarna', 'Bosch', 'Stihl', 'Gardena', 'Makita', 'Black+Decker', 'Ryobi', 'Einhell', 'Honda', 'Viking'],
+  musique:        ['Yamaha', 'Roland', 'Fender', 'Gibson', 'Marshall', 'Casio', 'Korg', 'Boss', 'Shure', 'Sennheiser', 'AKG', 'Steinway'],
+  bijoux:         ['Cartier', 'Swarovski', 'Pandora', 'Fossil', 'Seiko', 'Citizen', 'Casio', 'Longines', 'TAG Heuer', 'Tissot', 'Daniel Wellington', 'Cluse'],
+  sport:          ['Decathlon', 'Nike', 'Adidas', 'Puma', 'Salomon', 'Rossignol', 'Speedo', 'Shimano', 'Trek', 'Head', 'Wilson', 'Babolat'],
+  habitat:        ['Daikin', 'Mitsubishi', 'Atlantic', 'De Dietrich', 'Viessmann', 'Velux', 'Aldes', 'Panasonic', 'Hitachi', 'Vaillant', 'Buderus'],
+  outillage:      ['Bosch', 'DeWalt', 'Makita', 'Milwaukee', 'Stanley', 'Black+Decker', 'Ryobi', 'Festool', 'Hilti', 'Metabo', 'Würth', 'Facom'],
+  mobilier:       ['IKEA', 'Conforama', 'But', 'Maisons du Monde', 'Habitat', 'Roche Bobois', 'Fly', 'La Redoute'],
+  autre:          [],
+}
+
+export const CATEGORY_STORES: Record<string, string[]> = {
+  electromenager: ['Darty', 'Boulanger', 'Fnac', 'Conforama', 'But', 'Electro Dépôt', 'Leclerc', 'Amazon', 'Cdiscount'],
+  electronique:   ['Fnac', 'Darty', 'Boulanger', 'Amazon', 'Cdiscount', 'Leclerc'],
+  informatique:   ['Fnac', 'Darty', 'Boulanger', 'LDLC', 'TopAchat', 'Amazon', 'Cdiscount', 'Apple Store'],
+  vehicule:       ['Concessionnaire Renault', 'Concessionnaire Peugeot', 'Concessionnaire Citroën', 'LeBonCoin', 'AutoScout24', 'L\'Argus', 'Moto Axxe'],
+  jardinage:      ['Leroy Merlin', 'Castorama', 'Bricorama', 'Brico Dépôt', 'Weldom', 'Point Vert', 'Amazon'],
+  musique:        ['Woodbrass', 'Thomann', 'Bax Music', 'Fnac', 'Amazon', 'Cultura', 'Music & Sound'],
+  bijoux:         ['Histoire d\'Or', 'Marc Orian', 'Maty', 'Bijouterie Chaumet', 'Amazon', 'La Redoute'],
+  sport:          ['Decathlon', 'Go Sport', 'Intersport', 'Sport 2000', 'Amazon', 'Alltricks', 'Ekosport'],
+  habitat:        ['Leroy Merlin', 'Castorama', 'Brico Dépôt', 'Bricorama', 'Installateur local', 'Saint-Gobain'],
+  outillage:      ['Leroy Merlin', 'Castorama', 'Brico Dépôt', 'Amazon', 'Würth', 'Outillage Online', 'Point P'],
+  mobilier:       ['IKEA', 'Conforama', 'But', 'Maisons du Monde', 'Amazon', 'Cdiscount', 'La Redoute', 'Fly'],
+  autre:          ['Amazon', 'Fnac', 'Darty', 'Cdiscount', 'Leboncoin', 'Vinted'],
+}
+
 export const CATEGORY_PHOTOS: Record<string, string> = {
-  electronique: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&q=80',
   electromenager: 'https://images.unsplash.com/photo-1626806819282-2c1dc01a5e0c?w=600&q=80',
-  informatique: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80',
-  outillage: 'https://images.unsplash.com/photo-1581147036324-c17ac6a85dcf?w=600&q=80',
-  mobilier: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80',
-  autre: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+  electronique:   'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&q=80',
+  informatique:   'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80',
+  vehicule:       'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80',
+  jardinage:      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80',
+  musique:        'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600&q=80',
+  bijoux:         'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80',
+  sport:          'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80',
+  habitat:        'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80',
+  outillage:      'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&q=80',
+  mobilier:       'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80',
+  autre:          'https://images.unsplash.com/photo-1553481187-be93c21490a9?w=600&q=80',
 }

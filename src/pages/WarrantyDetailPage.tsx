@@ -100,13 +100,23 @@ export default function WarrantyDetailPage() {
               { label: 'Durée de garantie', value: `${w.warrantyDurationMonths} mois` },
               { label: "Date d'expiration", value: formatDate(w.expirationDate) },
               { label: 'Temps restant', value: formatTimeRemaining(w.daysRemaining) },
-            ].map(f => (
-              <div key={f.label} className="bg-gray-50 rounded-xl p-3.5">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{f.label}</p>
-                <p className="text-sm font-semibold text-gray-800">{f.value}</p>
+              w.brand ? { label: 'Marque', value: w.brand } : null,
+              w.store ? { label: 'Magasin / Vendeur', value: w.store } : null,
+            ].filter(Boolean).map(f => (
+              <div key={f!.label} className="bg-gray-50 rounded-xl p-3.5">
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{f!.label}</p>
+                <p className="text-sm font-semibold text-gray-800">{f!.value}</p>
               </div>
             ))}
           </div>
+
+          {/* Numéro de série */}
+          {w.serialNumber && (
+            <div className="bg-gray-50 rounded-xl p-4 mb-5">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Numéro de série</p>
+              <p className="text-sm font-semibold text-gray-800 font-mono">{w.serialNumber}</p>
+            </div>
+          )}
 
           {/* Notes */}
           {w.notes && (
@@ -114,6 +124,22 @@ export default function WarrantyDetailPage() {
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Notes</p>
               <p className="text-sm text-gray-600 leading-relaxed">{w.notes}</p>
             </div>
+          )}
+
+          {/* Documents */}
+          {(w.documents?.length ?? 0) > 0 && (
+            <button
+              onClick={() => navigate(`/warranty/${w.id}/documents`)}
+              className="w-full flex items-center justify-center gap-2 text-sm text-brand-600 bg-brand-50 border border-brand-200 hover:bg-brand-100 py-2.5 rounded-xl font-medium transition-colors mb-5"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="14 2 14 8 20 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {w.documents!.length === 1
+                ? 'Voir le ticket / document'
+                : `Voir les documents (${w.documents!.length})`}
+            </button>
           )}
 
           {/* Actions */}

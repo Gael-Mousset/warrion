@@ -9,6 +9,7 @@ import RegisterPage from '../pages/RegisterPage'
 import DashboardPage from '../pages/DashboardPage'
 import WarrantyDetailPage from '../pages/WarrantyDetailPage'
 import WarrantyFormPage from '../pages/WarrantyFormPage'
+import WarrantyDocumentsPage from '../pages/WarrantyDocumentsPage'
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -49,6 +50,11 @@ export default function AppRouter() {
         <Route path="/warranty/:id/edit" element={
           <ProtectedRoute>
             <Layout><WarrantyFormPage /></Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/warranty/:id/documents" element={
+          <ProtectedRoute>
+            <Layout><WarrantyDocumentsPage /></Layout>
           </ProtectedRoute>
         } />
         <Route path="*" element={<Navigate to="/" replace />} />

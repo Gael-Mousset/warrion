@@ -6,6 +6,12 @@ export type Category =
   | 'electromenager'
   | 'electronique'
   | 'informatique'
+  | 'vehicule'
+  | 'jardinage'
+  | 'musique'
+  | 'bijoux'
+  | 'sport'
+  | 'habitat'
   | 'outillage'
   | 'mobilier'
   | 'autre'
@@ -18,6 +24,12 @@ export interface User {
   createdAt: string
 }
 
+export interface DocumentItem {
+  name: string
+  dataUrl: string
+  type: string
+}
+
 export interface Warranty {
   id: string
   userId: string
@@ -25,9 +37,13 @@ export interface Warranty {
   category: Category
   purchaseDate: string
   warrantyDurationMonths: number
+  brand?: string
+  serialNumber?: string
+  store?: string
   photoUrl?: string
   notes?: string
   isPrecious?: boolean
+  documents?: DocumentItem[]
   createdAt: string
 }
 
@@ -46,7 +62,28 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   electromenager: 'Électroménager',
   electronique: 'Électronique',
   informatique: 'Informatique',
+  vehicule: 'Véhicule',
+  jardinage: 'Jardinage',
+  musique: 'Musique & Instruments',
+  bijoux: 'Bijoux & Montres',
+  sport: 'Sport & Loisirs',
+  habitat: 'Habitat & Énergie',
   outillage: 'Outillage',
   mobilier: 'Mobilier',
   autre: 'Autre',
 }
+
+export const CATEGORIES: Category[] = [
+  'electromenager',
+  'electronique',
+  'informatique',
+  'vehicule',
+  'jardinage',
+  'musique',
+  'bijoux',
+  'sport',
+  'habitat',
+  'outillage',
+  'mobilier',
+  'autre',
+]
