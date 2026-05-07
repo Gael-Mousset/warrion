@@ -12,7 +12,15 @@ services:
       - warrion_network
     healthcheck:
       # mongosh est toujours présent dans l'image mongo:7
-      test: ["CMD", "mongosh", "--port", "27018", "--eval", "db.adminCommand('ping')"]
+      test:
+        [
+          "CMD",
+          "mongosh",
+          "--port",
+          "27018",
+          "--eval",
+          "db.adminCommand('ping')",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -30,6 +38,7 @@ services:
       - MONGODB_URI=mongodb://mongo:27018/warrion
       - FRONTEND_URL=http://localhost:8088
       # - FRONTEND_URL=http://51.77.137.168:8088
+      - NODE_ENV=production
     restart: always
     depends_on:
       mongo:
