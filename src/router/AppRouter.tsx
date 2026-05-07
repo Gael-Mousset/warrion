@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar'
 import LandingPage from '../pages/LandingPage'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
+import ForgotPasswordPage from '../pages/ForgotPasswordPage'
+import ResetPasswordPage from '../pages/ResetPasswordPage'
 import DashboardPage from '../pages/DashboardPage'
 import WarrantyDetailPage from '../pages/WarrantyDetailPage'
 import WarrantyFormPage from '../pages/WarrantyFormPage'
@@ -32,6 +34,8 @@ export default function AppRouter() {
         <Route path="/" element={<RootRedirect />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Layout><DashboardPage /></Layout>
